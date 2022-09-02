@@ -1,14 +1,23 @@
 /*------------------------ Constants -------------------------------*/
 
-const winningCombos = [[],[],[],[],[],[],[],[]]
-// Each array will contain three indices of the board that make a winner if they hold the same player value (1 or -1). If you are having trouble with this step, feel free to check out the winningCombos array in the solution code.
+
+const winningCombos = [
+  [0,1,2],
+  [3,4,5],
+  [6,7,8],
+  [0,3,6],
+  [1,4,7],
+  [2,5,8]
+  [0,4,8],
+  [2,4,6],
+]
 
 /*------------------------- Variables (state) ---------------------*/
 
 let board, turn, winner
 
 
-/*-------------------- Cached Element References -------------------*/
+/*-------------------- Cached divment References -------------------*/
 
 const squareEls = document.querySelectorAll('.square') // all squares
 console.log(squareEls)
@@ -25,83 +34,37 @@ console.log(messageEl)
 init()
 
 function init (){
-  let board = [null,null,null,null,null,null,null,null,null]
-  let turn = 1
-  let winner = null
+  board = [null,null,1,null,1,null,1,null,null]
+  turn = 1
+  winner = null
   render()
 }
 
 function render(){
-  board.forEach((ele,i) => {
-    if (ele === -1){
-      squareEls[i].style.color = blue
-    }else if (ele === 1){
-      squareEls[i].style.color = orange
-    }else if (ele === num){
-      squareEls[i].style.color = gray
-      messageEl.textContent = `It is ${turn}'s turn!`
+  board.forEach(function(sq,i) {
+    if (sq === -1){
+      squareEls[i].textContent = 'X'
+    } else if (sq === 1){
+      squareEls[i].textContent = 'O'
+    } else if (sq === null){
+      squareEls[i].textContent = ''
     }
   })
-  if (winner === 'T'){
+
+  if (winner === null){
+
+    messageEl.textContent = `It's ${turn === 1 ? 'Player A' : 'Player B'}'s turn`
+  } else if (winner === 1){
+    messageEl.textContent = `Congratulations! player X has won!`
+  } else if (winner === -1){
+    messageEl.textContent = `Congratulations! player O has won!`
+  } else if (winner === 'T'){
     messageEl.textContent = `It's a tie!`
-  } else{ // specify 1 or -1 ?
-    messageEl.textContent = `Congratulations! ${turn} has won!` // check this, not sure it's turn as name
   }
 }
 
+// turn *= -1
 
-// Step 1 - Define the required variables used to track the state of the game
-
-  //// 1a) Use a variable named `board` to represent the state of the squares on
-  ////    the board.
-
-  //// 1b) Use a variable named `turn` to track whose turn it is.
-
-  //// 1c) Use a variable named `winner` to represent if anyone has won yet, or
-  ////    if a tie has occurred.
-
-// Step 2 - Store cached element references
-
-  //// 2a) In a constant called `squareEls`, store the nine elements
-  ////    representing the squares on the page.
-
-  //// 2b) In a constant called `messageEl`, store the element that displays the
-  ////    game's status on the page.
-
-
-// Step 3 - Upon loading, the game state should be initialized, and a function
-//          should be called to render this game state
-
-  //// 3a) Create a function called `init`.
-
-  //// 3b) Call this `init` function when the app loads.
-
-  //// 3c) Set the `board` variable to an array containing nine `null`s to
-  ////    represent empty squares.
-
-  //// 3d) Set the `turn` to `1` - which will represent player X.
-
-  //// 3e) Set the `winner` to `null`.
-
-  //// 3f) Call a function called `render` at the end of the `init` function.
-
-// Step 4 - The state of the game should be rendered to the user
-
-  //// 4a) Create a function called `render`.
-
-  //// 4b) Loop over `board` and for each element:
-  ////     - Use the current index of the iteration to access the corresponding
-  ////       square in the `squareEls` array.
-  ////     - Style that square however you wish, dependent on the value
-  ////       contained in the current cell being iterated over (`-1`, `1`, or
-  ////       `null`).
-
-  // 4c) Render a message based on the current game state:
-  ////     - If winner has a value of `null` (meaning the game is still in
-  ////      progress), render whose turn it is.
-  ////     - If `winner` is equal to `'T'` (tie), render a tie message.
-  ////     - Otherwise, render a congratulatory message to the player that has
-  ////       won.
 
 
 // Step 5 - Define the required constants
@@ -115,13 +78,13 @@ function render(){
   //     parameter.
 
   // 6b) Attach an event listener to the game board (you can do this to each
-  //     one of the existing `squareEls` OR add a new cached element reference
+  //     one of the existing `squareEls` OR add a new cached divment reference
   //     that will allow you to take advantage of event bubbling). On the
   //     `'click'` event, it should call the `handleClick` function
   //     you created in 6a.
 
   // 6c) Obtain the index of the square that was clicked by "extracting" the
-  //     index from an `id` assigned to the element in the HTML. Assign this
+  //     index from an `id` assigned to the divment in the HTML. Assign this
   //     to a constant called `sqIdx`.
 
   // 6d) If the `board` has a value at the `sqIdx`, immediately `return`
@@ -147,7 +110,7 @@ function render(){
   /*
    * There are two methods you can use to find out if there is a winner.
    *
-   * Step b1 below is a more elegant method that takes advantage of the
+   * Step b1 below is a more divgant method that takes advantage of the
    * `winningCombos` array you wrote above in step 5.
    *
    * Step b2 might be a little simpler to comprehend, but you'll need to write
@@ -159,14 +122,14 @@ function render(){
   // 7b1)Loop through each of the winning combination arrays defined in the
   //     `winningCombos` array. Total up the three board positions using the
   //     three indexes in the current combo. Convert the total to an absolute
-  //     value (convert any negaelee total to posielee). If the total equals 3,
+  //     value (convert any negadive total to posidive). If the total equals 3,
   //     we have a winner! Set the `winner` variable to the board's value at
   //     the index specified by the first index of that winning combination's
   //     array by returning that value.
 
   // 7b2)For each one of the winning combinations you wrote in step 5, find the
   //     total of each winning combination. Convert the total to an absolute
-  //     value (convert any negaelee total to posielee). If the total equals 3,
+  //     value (convert any negadive total to posidive). If the total equals 3,
   //     we have a winner! Set the `winner` variable to the board's value at
   //     the index specified by the first index of that winning combination's
   //     array by returning that value.
@@ -181,7 +144,63 @@ function render(){
 
   // 8a) Add a reset button to the HTML document.
 
-  // 8b) Store the new reset button element in a constant named `resetBtnEl`.
+  // 8b) Store the new reset button divment in a constant named `resetBtnEl`.
 
   // 8c) Attach an event listener to the `resetBtnEl`. On the `'click'` event
   //     it should call the `init` function you created in 3.
+
+
+  // ----------------HISTORY OF COMMENTS ---------------------------------
+
+  // Step 1 - Define the required variables used to track the state of the game
+
+  //// 1a) Use a variable named `board` to represent the state of the squares on
+  ////    the board.
+
+  //// 1b) Use a variable named `turn` to track whose turn it is.
+
+  //// 1c) Use a variable named `winner` to represent if anyone has won yet, or
+  ////    if a tie has occurred.
+
+// Step 2 - Store cached divment references
+
+  //// 2a) In a constant called `squareEls`, store the nine divments
+  ////    representing the squares on the page.
+
+  //// 2b) In a constant called `messageEl`, store the divment that displays the
+  ////    game's status on the page.
+
+
+// Step 3 - Upon loading, the game state should be initialized, and a function
+//          should be called to render this game state
+
+  //// 3a) Create a function called `init`.
+
+  //// 3b) Call this `init` function when the app loads.
+
+  //// 3c) Set the `board` variable to an array containing nine `null`s to
+  ////    represent empty squares.
+
+  //// 3d) Set the `turn` to `1` - which will represent player X.
+
+  //// 3e) Set the `winner` to `null`.
+
+  //// 3f) Call a function called `render` at the end of the `init` function.
+
+// Step 4 - The state of the game should be rendered to the user
+
+  //// 4a) Create a function called `render`.
+
+  //// 4b) Loop over `board` and for each divment:
+  ////     - Use the current index of the iteration to access the corresponding
+  ////       square in the `squareEls` array.
+  ////     - Style that square however you wish, dependent on the value
+  ////       contained in the current cell being iterated over (`-1`, `1`, or
+  ////       `null`).
+
+  //// 4c) Render a message based on the current game state:
+  ////     - If winner has a value of `null` (meaning the game is still in
+  ////      progress), render whose turn it is.
+  ////     - If `winner` is equal to `'T'` (tie), render a tie message.
+  ////     - Otherwise, render a congratulatory message to the player that has
+  ////       won.
