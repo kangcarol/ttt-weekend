@@ -45,9 +45,9 @@ function init (){
 
 function render(){
   board.forEach(function(sq,i) {
-    if (sq === -1){
+    if (sq === 1){
       squareEls[i].textContent = 'X'
-    } else if (sq === 1){
+    } else if (sq === -1){
       squareEls[i].textContent = 'O'
     } else if (sq === null){
       squareEls[i].textContent = ''
@@ -70,14 +70,18 @@ function handleClick(evt){
   if (board[sqIdx] || !winner === null){
     return
   }
-  board[sqIdx] = turn *= -1
+  board[sqIdx] = turn
+  turn *= -1
   getWinner()
   render()
   console.log(board[sqIdx])
 }
 
 function getWinner(){
+  // const combination = winningCombos
+  for (let i=0; i<winningCombos.length; i++){
 
+  }
 }
 
 
