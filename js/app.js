@@ -20,10 +20,9 @@ let board, turn, winner
 /*-------------------- Cached divment References -------------------*/
 
 const squareEls = document.querySelectorAll('.square') // all squares
-console.log(squareEls)
 
 const messageEl = document.getElementById('message')
-console.log(messageEl)
+
 
 
 /*------------------------- Event Listeners -----------------------*/
@@ -56,8 +55,7 @@ function render(){
   })
 
   if (winner === null){
-
-    messageEl.textContent = `It's ${turn === 1 ? 'Player A' : 'Player B'}'s turn`
+    messageEl.textContent = `It's ${turn === 1 ? 'Player X' : 'Player O'}'s turn`
   } else if (winner === 1){
     messageEl.textContent = `Congratulations! player X has won!`
   } else if (winner === -1){
@@ -68,45 +66,22 @@ function render(){
 }
 
 function handleClick(evt){
-  let sqIdx = parseInt(evt.target.id.replace('sq', ''))
-  console.log(sqIdx)
+  const sqIdx = parseInt(evt.target.id.replace('sq', ''))
+  if (board[sqIdx] || !winner === null){
+    return
+  }
+  board[sqIdx] = turn *= -1
+  getWinner()
+  render()
+  console.log(board[sqIdx])
+}
+
+function getWinner(){
+
 }
 
 
 
-// turn *= -1
-
-
-// Step 6 - Handle a player clicking a square with a `handleClick` function
-
-  //// 6a) Create a function called `handleClick`. It will have an `evt`
-  ////     parameter.
-
- //// 6b) Attach an event listener to the game board (you can do this to each
-  ////     one of the existing `squareEls` OR add a new cached divment reference
-  ////     that will allow you to take advantage of event bubbling). On the
-  ////     `'click'` event, it should call the `handleClick` function
-  ////     you created in 6a.
-
-  // 6c) Obtain the index of the square that was clicked by "extracting" the
-  //     index from an `id` assigned to the divment in the HTML. Assign this
-  //     to a constant called `sqIdx`.
-
-  // 6d) If the `board` has a value at the `sqIdx`, immediately `return`
-  //     because that square is already taken. Also, if `winner` is not `null`
-  //     immediately `return` because the game is over.
-
-  // 6e) Update the `board` array at the `sqIdx` with the current value of
-  //     `turn`.
-
-  // 6f) Change the turn by multiplying `turn` by `-1` (this flips a `1` to
-  //     `-1`, and vice-versa).
-
-  // 6g) Set the `winner` variable if there's a winner by calling a new
-  //     function: `getWinner`.
-
-  // 6h) All the state has been updated so we need to render our updated state
-  //     to the user by calling the `render` function we wrote earlier.
 
 // Step 7 - Build the `getWinner` function
 
@@ -214,3 +189,34 @@ function handleClick(evt){
 
   //// 5a) In a constant called `winningCombos` define the eight possible winning
   ////     combinations as an array of arrays.
+
+  // Step 6 - Handle a player clicking a square with a `handleClick` function
+
+  //// 6a) Create a function called `handleClick`. It will have an `evt`
+  ////     parameter.
+
+ //// 6b) Attach an event listener to the game board (you can do this to each
+  ////     one of the existing `squareEls` OR add a new cached divment reference
+  ////     that will allow you to take advantage of event bubbling). On the
+  ////     `'click'` event, it should call the `handleClick` function
+  ////     you created in 6a.
+
+  // 6c) Obtain the index of the square that was clicked by "extracting" the
+  //     index from an `id` assigned to the divment in the HTML. Assign this
+  //     to a constant called `sqIdx`.
+
+  // 6d) If the `board` has a value at the `sqIdx`, immediately `return`
+  //     because that square is already taken. Also, if `winner` is not `null`
+  //     immediately `return` because the game is over.
+
+  // 6e) Update the `board` array at the `sqIdx` with the current value of
+  //     `turn`.
+
+  // 6f) Change the turn by multiplying `turn` by `-1` (this flips a `1` to
+  //     `-1`, and vice-versa).
+
+  // 6g) Set the `winner` variable if there's a winner by calling a new
+  //     function: `getWinner`.
+
+  // 6h) All the state has been updated so we need to render our updated state
+  //     to the user by calling the `render` function we wrote earlier.
