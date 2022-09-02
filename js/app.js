@@ -25,8 +25,12 @@ console.log(squareEls)
 const messageEl = document.getElementById('message')
 console.log(messageEl)
 
+
 /*------------------------- Event Listeners -----------------------*/
 
+squareEls.forEach(function(squareSelect) {
+  squareSelect.addEventListener('click', handleClick)
+})
 
 
 /*---------------------------- Functions ---------------------------*/
@@ -34,7 +38,7 @@ console.log(messageEl)
 init()
 
 function init (){
-  board = [null,null,1,null,1,null,1,null,null]
+  board = [null,null,null,null,null,null,null,null,null]
   turn = 1
   winner = null
   render()
@@ -63,25 +67,26 @@ function render(){
   }
 }
 
+function handleClick(evt){
+  let sqIdx = parseInt(evt.target.id.replace('sq', ''))
+  console.log(sqIdx)
+}
+
+
+
 // turn *= -1
 
 
-
-// Step 5 - Define the required constants
-
-  // 5a) In a constant called `winningCombos` define the eight possible winning
-  //     combinations as an array of arrays.
-
 // Step 6 - Handle a player clicking a square with a `handleClick` function
 
-  // 6a) Create a function called `handleClick`. It will have an `evt`
-  //     parameter.
+  //// 6a) Create a function called `handleClick`. It will have an `evt`
+  ////     parameter.
 
-  // 6b) Attach an event listener to the game board (you can do this to each
-  //     one of the existing `squareEls` OR add a new cached divment reference
-  //     that will allow you to take advantage of event bubbling). On the
-  //     `'click'` event, it should call the `handleClick` function
-  //     you created in 6a.
+ //// 6b) Attach an event listener to the game board (you can do this to each
+  ////     one of the existing `squareEls` OR add a new cached divment reference
+  ////     that will allow you to take advantage of event bubbling). On the
+  ////     `'click'` event, it should call the `handleClick` function
+  ////     you created in 6a.
 
   // 6c) Obtain the index of the square that was clicked by "extracting" the
   //     index from an `id` assigned to the divment in the HTML. Assign this
@@ -204,3 +209,8 @@ function render(){
   ////     - If `winner` is equal to `'T'` (tie), render a tie message.
   ////     - Otherwise, render a congratulatory message to the player that has
   ////       won.
+
+  // Step 5 - Define the required constants
+
+  //// 5a) In a constant called `winningCombos` define the eight possible winning
+  ////     combinations as an array of arrays.
