@@ -1,13 +1,12 @@
 /*------------------------ Constants -------------------------------*/
 
-
 const winningCombos = [
   [0,1,2],
   [3,4,5],
   [6,7,8],
   [0,3,6],
   [1,4,7],
-  [2,5,8]
+  [2,5,8],
   [0,4,8],
   [2,4,6],
 ]
@@ -23,6 +22,7 @@ const squareEls = document.querySelectorAll('.square') // all squares
 
 const messageEl = document.getElementById('message')
 
+const resetBtn = document.getElementById('resetBtn')
 
 
 /*------------------------- Event Listeners -----------------------*/
@@ -31,6 +31,7 @@ squareEls.forEach(function(squareSelect) {
   squareSelect.addEventListener('click', handleClick)
 })
 
+resetBtn.addEventListener('click', handleResetBtnClick)
 
 /*---------------------------- Functions ---------------------------*/
 
@@ -78,30 +79,31 @@ function handleClick(evt){
 }
 
 function getWinner(){
-  // const combination = winningCombos
-  for (let i=0; i<winningCombos.length; i++){
-
+  const array = []
+  for (let i=0; i < winningCombos.length; i++){
+    let sum = 0
+    for (let j=0; j < 3; j++){
+      sum += board[winningCombos[i][j]]
+    }
+    array.push(sum)
   }
+  if (array.some(ele => ele === 3)){
+    console.log(" X is winner!!!!")
+    winner = 1
+  } else if (array.some(ele => ele === -3)){
+    console.log("O is winner!!!!")
+    winner = -1
+  } else if (array.some(ele => ele === null)){
+    console.log("it's a tie!")
+  }
+}
+
+function handleResetBtnClick(e){
+  init()
 }
 
 
 
-
-// Step 7 - Build the `getWinner` function
-
-  // 7a) Create a function called `getWinner`
-
-  /*
-   * There are two methods you can use to find out if there is a winner.
-   *
-   * Step b1 below is a more divgant method that takes advantage of the
-   * `winningCombos` array you wrote above in step 5.
-   *
-   * Step b2 might be a little simpler to comprehend, but you'll need to write
-   * more code. Step b2 also won't take advantage of the `winningCombos`
-   * array, but using it as a reference will help you build a solution.
-   * ***Ensure you choose only one path.***
-   */
 
   // 7b1)Loop through each of the winning combination arrays defined in the
   //     `winningCombos` array. Total up the three board positions using the
@@ -205,22 +207,38 @@ function getWinner(){
   ////     `'click'` event, it should call the `handleClick` function
   ////     you created in 6a.
 
-  // 6c) Obtain the index of the square that was clicked by "extracting" the
-  //     index from an `id` assigned to the divment in the HTML. Assign this
-  //     to a constant called `sqIdx`.
+  //// 6c) Obtain the index of the square that was clicked by "extracting" the
+  ////     index from an `id` assigned to the divment in the HTML. Assign this
+  ////     to a constant called `sqIdx`.
 
-  // 6d) If the `board` has a value at the `sqIdx`, immediately `return`
-  //     because that square is already taken. Also, if `winner` is not `null`
-  //     immediately `return` because the game is over.
+  //// 6d) If the `board` has a value at the `sqIdx`, immediately `return`
+  ////     because that square is already taken. Also, if `winner` is not `null`
+  ////     immediately `return` because the game is over.
 
-  // 6e) Update the `board` array at the `sqIdx` with the current value of
-  //     `turn`.
+  //// 6e) Update the `board` array at the `sqIdx` with the current value of
+  ////     `turn`.
 
-  // 6f) Change the turn by multiplying `turn` by `-1` (this flips a `1` to
-  //     `-1`, and vice-versa).
+  //// 6f) Change the turn by multiplying `turn` by `-1` (this flips a `1` to
+  ////     `-1`, and vice-versa).
 
-  // 6g) Set the `winner` variable if there's a winner by calling a new
-  //     function: `getWinner`.
+  //// 6g) Set the `winner` variable if there's a winner by calling a new
+  ////     function: `getWinner`.
 
-  // 6h) All the state has been updated so we need to render our updated state
-  //     to the user by calling the `render` function we wrote earlier.
+  //// 6h) All the state has been updated so we need to render our updated state
+  ////     to the user by calling the `render` function we wrote earlier.
+
+  // Step 7 - Build the `getWinner` function
+
+  //// 7a) Create a function called `getWinner`
+
+  // /*
+  //  * There are two methods you can use to find out if there is a winner.
+  //  *
+  //  * Step b1 below is a more divgant method that takes advantage of the
+  //  * `winningCombos` array you wrote above in step 5.
+  //  *
+  //  * Step b2 might be a little simpler to comprehend, but you'll need to write
+  //  * more code. Step b2 also won't take advantage of the `winningCombos`
+  //  * array, but using it as a reference will help you build a solution.
+  //  * ***Ensure you choose only one path.***
+  //  */
