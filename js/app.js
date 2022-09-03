@@ -16,7 +16,7 @@ const winningCombos = [
 let board, turn, winner
 
 
-/*-------------------- Cached divment References -------------------*/
+/*-------------------- Cached element References -------------------*/
 
 const squareEls = document.querySelectorAll('.square') // all squares
 
@@ -31,7 +31,7 @@ squareEls.forEach(function(squareSelect) {
   squareSelect.addEventListener('click', handleClick)
 })
 
-resetBtn.addEventListener('click', handleResetBtnClick)
+resetBtn.addEventListener('click', init)
 
 /*---------------------------- Functions ---------------------------*/
 
@@ -41,16 +41,19 @@ function init (){
   board = [null,null,null,null,null,null,null,null,null]
   turn = 1
   winner = null
+  console.log(winner, 'winner')
   render()
+  resetBtn.setAttribute('hidden', true)
 }
 
 function render(){
+  resetBtn.removeAttribute('hidden')
   board.forEach(function(sq,i) {
     if (sq === 1){
       squareEls[i].textContent = 'X'
     } else if (sq === -1){
       squareEls[i].textContent = 'O'
-    } else if (sq === null){
+    } else {
       squareEls[i].textContent = ''
     }
   })
@@ -68,72 +71,41 @@ function render(){
 
 function handleClick(evt){
   const sqIdx = parseInt(evt.target.id.replace('sq', ''))
-  if (board[sqIdx] || !winner === null){
+  if (board[sqIdx] || winner !== null ){
     return
   }
   board[sqIdx] = turn
   turn *= -1
   getWinner()
   render()
-  console.log(board[sqIdx])
+  // console.log(board[sqIdx])
 }
 
 function getWinner(){
   const array = []
+  if (!board.includes(null)){
+    console.log("it's a tie!")
+    winner = 'T'
+  }
+
   for (let i=0; i < winningCombos.length; i++){
     let sum = 0
-    for (let j=0; j < 3; j++){
+    for (let j=0; j < winningCombos[i].length ; j++){
       sum += board[winningCombos[i][j]]
     }
     array.push(sum)
   }
+
   if (array.some(ele => ele === 3)){
     console.log(" X is winner!!!!")
     winner = 1
   } else if (array.some(ele => ele === -3)){
     console.log("O is winner!!!!")
     winner = -1
-  } else if (array.some(ele => ele === null)){
-    console.log("it's a tie!")
   }
+  return null
 }
 
-function handleResetBtnClick(e){
-  init()
-}
-
-
-
-
-  // 7b1)Loop through each of the winning combination arrays defined in the
-  //     `winningCombos` array. Total up the three board positions using the
-  //     three indexes in the current combo. Convert the total to an absolute
-  //     value (convert any negadive total to posidive). If the total equals 3,
-  //     we have a winner! Set the `winner` variable to the board's value at
-  //     the index specified by the first index of that winning combination's
-  //     array by returning that value.
-
-  // 7b2)For each one of the winning combinations you wrote in step 5, find the
-  //     total of each winning combination. Convert the total to an absolute
-  //     value (convert any negadive total to posidive). If the total equals 3,
-  //     we have a winner! Set the `winner` variable to the board's value at
-  //     the index specified by the first index of that winning combination's
-  //     array by returning that value.
-
-// 7c) If there is no winner, check to see if there is a tie. Set the
-  //     `winner` variable to `'T'` if there are no more nulls in the board
-  //     array byreturning the string `'T'`.
-
-  // 7d) If there is no winner and there isn’t a tie, return `null`.
-
-// Step 8 - Create Reset functionality
-
-  // 8a) Add a reset button to the HTML document.
-
-  // 8b) Store the new reset button divment in a constant named `resetBtnEl`.
-
-  // 8c) Attach an event listener to the `resetBtnEl`. On the `'click'` event
-  //     it should call the `init` function you created in 3.
 
 
   // ----------------HISTORY OF COMMENTS ---------------------------------
@@ -242,3 +214,34 @@ function handleResetBtnClick(e){
   //  * array, but using it as a reference will help you build a solution.
   //  * ***Ensure you choose only one path.***
   //  */
+
+
+  //// 7b1)Loop through each of the winning combination arrays defined in the
+  ////     `winningCombos` array. Total up the three board positions using the
+  ////     three indexes in the current combo. Convert the total to an absolute
+  ////     value (convert any negadive total to posidive). If the total equals 3,
+  ////     we have a winner! Set the `winner` variable to the board's value at
+  ////     the index specified by the first index of that winning combination's
+  ////     array by returning that value.
+
+  //// 7b2)For each one of the winning combinations you wrote in step 5, find the
+  ////     total of each winning combination. Convert the total to an absolute
+  ////     value (convert any negadive total to posidive). If the total equals 3,
+  ////     we have a winner! Set the `winner` variable to the board's value at
+  ////     the index specified by the first index of that winning combination's
+  ////     array by returning that value.
+
+// 7c) If there is no winner, check to see if there is a tie. Set the
+  //     `winner` variable to `'T'` if there are no more nulls in the board
+  //     array byreturning the string `'T'`.
+
+  // 7d) If there is no winner and there isn’t a tie, return `null`.
+
+// Step 8 - Create Reset functionality
+
+  // 8a) Add a reset button to the HTML document.
+
+  // 8b) Store the new reset button divment in a constant named `resetBtnEl`.
+
+  // 8c) Attach an event listener to the `resetBtnEl`. On the `'click'` event
+  //     it should call the `init` function you created in 3.
