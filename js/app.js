@@ -51,8 +51,10 @@ function render(){
   board.forEach(function(sq,i) {
     if (sq === 1){
       squareEls[i].textContent = 'X'
+      squareEls[i].style.color = 'red'
     } else if (sq === -1){
       squareEls[i].textContent = 'O'
+      squareEls[i].style.color = 'black'
     } else {
       squareEls[i].textContent = ''
     }
@@ -61,9 +63,11 @@ function render(){
   if (winner === null){
     messageEl.textContent = `It's ${turn === 1 ? 'Player X' : 'Player O'}'s turn`
   } else if (winner === 1){
-    messageEl.textContent = `Congratulations! player X has won!`
+    messageEl.textContent = `Congratulations! X has won!`
+    confetti.start(2000)
   } else if (winner === -1){
-    messageEl.textContent = `Congratulations! player O has won!`
+    messageEl.textContent = `Congratulations! O has won!`
+    confetti.start(2000)
   } else if (winner === 'T'){
     messageEl.textContent = `It's a tie!`
   }
@@ -132,18 +136,18 @@ function getWinner(){
 // Step 3 - Upon loading, the game state should be initialized, and a function
 //          should be called to render this game state
 
-  //// 3a) Create a function called `init`.
+  // 3a) Create a function called `init`.
 
-  //// 3b) Call this `init` function when the app loads.
+  // 3b) Call this `init` function when the app loads.
 
-  //// 3c) Set the `board` variable to an array containing nine `null`s to
-  ////    represent empty squares.
+  // 3c) Set the `board` variable to an array containing nine `null`s to
+  //    represent empty squares.
 
-  //// 3d) Set the `turn` to `1` - which will represent player X.
+  // 3d) Set the `turn` to `1` - which will represent player X.
 
-  //// 3e) Set the `winner` to `null`.
+  // 3e) Set the `winner` to `null`.
 
-  //// 3f) Call a function called `render` at the end of the `init` function.
+  // 3f) Call a function called `render` at the end of the `init` function.
 
 // Step 4 - The state of the game should be rendered to the user
 
