@@ -24,6 +24,8 @@ const messageEl = document.getElementById('message')
 
 const resetBtn = document.getElementById('resetBtn')
 
+document.getElementById('title').style.color = 'white'
+
 
 /*------------------------- Event Listeners -----------------------*/
 
@@ -34,6 +36,7 @@ squareEls.forEach(function(squareSelect) {
 resetBtn.addEventListener('click', init)
 
 /*---------------------------- Functions ---------------------------*/
+
 
 init()
 
@@ -54,7 +57,7 @@ function render(){
       squareEls[i].style.color = 'red'
     } else if (sq === -1){
       squareEls[i].textContent = 'O'
-      squareEls[i].style.color = 'black'
+      squareEls[i].style.color = 'blue'
     } else {
       squareEls[i].textContent = ''
     }
@@ -62,14 +65,18 @@ function render(){
 
   if (winner === null){
     messageEl.textContent = `It's ${turn === 1 ? 'Player X' : 'Player O'}'s turn`
+    messageEl.style.color = turn === 1 ? 'red' : 'blue'
   } else if (winner === 1){
     messageEl.textContent = `Congratulations! X has won!`
+    messageEl.style.color = 'red'
     confetti.start(2000)
   } else if (winner === -1){
     messageEl.textContent = `Congratulations! O has won!`
+    messageEl.style.color = 'blue'
     confetti.start(2000)
   } else if (winner === 'T'){
     messageEl.textContent = `It's a tie!`
+    messageEl.style.color = 'black'
   }
 }
 

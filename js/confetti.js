@@ -42,7 +42,7 @@ var confetti = {
 		if (winner === 1){
 			particle.color = 'red'
 		}else if (winner === -1){
-			particle.color = 'black'
+			particle.color = 'blue'
 		}
 		particle.x = Math.random() * width;
 		particle.y = Math.random() * height - height;
