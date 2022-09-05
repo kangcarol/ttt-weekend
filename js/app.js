@@ -76,7 +76,7 @@ function render(){
     confetti.start(2000)
   } else if (winner === 'T'){
     messageEl.textContent = `It's a tie!`
-    messageEl.style.color = 'black'
+    messageEl.style.color = 'white'
   }
 }
 
