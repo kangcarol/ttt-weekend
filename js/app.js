@@ -24,6 +24,8 @@ const messageEl = document.getElementById('message')
 
 const resetBtn = document.getElementById('resetBtn')
 
+const header = document.querySelector('h1')
+
 document.getElementById('title').style.color = 'white'
 
 
@@ -55,9 +57,11 @@ function render(){
     if (sq === 1){
       squareEls[i].textContent = 'X'
       squareEls[i].style.color = 'red'
+      squareEls[i].className = 'animate__animated animate__zoomIn'
     } else if (sq === -1){
       squareEls[i].textContent = 'O'
       squareEls[i].style.color = 'blue'
+      squareEls[i].className = 'animate__animated animate__zoomIn'
     } else {
       squareEls[i].textContent = ''
     }
