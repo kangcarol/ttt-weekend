@@ -26,7 +26,7 @@ const resetBtn = document.getElementById('resetBtn')
 
 const header = document.querySelector('h1')
 
-document.getElementById('title').style.color = 'white'
+header.style.color = 'white'
 
 
 /*------------------------- Event Listeners -----------------------*/
@@ -36,6 +36,7 @@ squareEls.forEach(function(squareSelect) {
 })
 
 resetBtn.addEventListener('click', init)
+
 
 /*---------------------------- Functions ---------------------------*/
 
@@ -47,12 +48,23 @@ function init (){
   turn = 1
   winner = null
   console.log(winner, 'winner')
+  header.classList.remove('animate__flash')
+  header.offsetWidth = header.offsetWidth
+  header.classList.add('animate__flash')
+
+  squareEls.forEach(ele => {
+    ele.classList.remove('animate__zoomIn')
+    ele.offsetWidth = squareEls.offsetWidth
+    // ele.classList.add('animate__zoomIn')
+  })
+
   render()
   resetBtn.setAttribute('hidden', true)
 }
 
 function render(){
   resetBtn.removeAttribute('hidden')
+
   board.forEach(function(sq,i) {
     if (sq === 1){
       squareEls[i].textContent = 'X'
@@ -71,11 +83,11 @@ function render(){
     messageEl.textContent = `It's ${turn === 1 ? 'Player X' : 'Player O'}'s turn`
     messageEl.style.color = turn === 1 ? 'red' : 'blue'
   } else if (winner === 1){
-    messageEl.textContent = `Congratulations! X has won!`
+    messageEl.textContent = `Congratulations!  X has won!`
     messageEl.style.color = 'red'
     confetti.start(2000)
   } else if (winner === -1){
-    messageEl.textContent = `Congratulations! O has won!`
+    messageEl.textContent = `Congratulations!  O has won!`
     messageEl.style.color = 'blue'
     confetti.start(2000)
   } else if (winner === 'T'){
@@ -120,6 +132,20 @@ function getWinner(){
   }
   return null
 }
+
+
+  // // squareEls.classList.remove('animate__animated animate__zoomIn')
+  // // void squareEls.animate
+  // header.classList.remove('animate__flash')
+  // // header.classList.remove('animate__animated')
+  // // void header.animate__animated
+  // void header.animate__flash
+  // // header.classList.add('animate__animated')
+  // header.classList.add('animate__flash')
+
+  // header.classList.remove('animate__flash')
+  // header.animate__flash = header.animate__flash
+  // header.classList.add('animate__flash')
 
 
 
