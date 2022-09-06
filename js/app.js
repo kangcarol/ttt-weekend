@@ -55,7 +55,6 @@ function init (){
   squareEls.forEach(ele => {
     ele.classList.remove('animate__zoomIn')
     ele.offsetWidth = squareEls.offsetWidth
-    // ele.classList.add('animate__zoomIn')
   })
 
   render()
@@ -74,7 +73,7 @@ function render(){
       squareEls[i].textContent = 'O'
       squareEls[i].style.color = 'blue'
       squareEls[i].className = 'animate__animated animate__zoomIn'
-    } else {
+    } else if (sq === null){
       squareEls[i].textContent = ''
     }
   })
@@ -133,19 +132,6 @@ function getWinner(){
   return null
 }
 
-
-  // // squareEls.classList.remove('animate__animated animate__zoomIn')
-  // // void squareEls.animate
-  // header.classList.remove('animate__flash')
-  // // header.classList.remove('animate__animated')
-  // // void header.animate__animated
-  // void header.animate__flash
-  // // header.classList.add('animate__animated')
-  // header.classList.add('animate__flash')
-
-  // header.classList.remove('animate__flash')
-  // header.animate__flash = header.animate__flash
-  // header.classList.add('animate__flash')
 
 
 
