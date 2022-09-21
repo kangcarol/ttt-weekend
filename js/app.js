@@ -47,7 +47,6 @@ function init (){
   board = [null,null,null,null,null,null,null,null,null]
   turn = 1
   winner = null
-  console.log(winner, 'winner')
   header.classList.remove('animate__flash')
   header.offsetWidth = header.offsetWidth
   header.classList.add('animate__flash')
@@ -104,7 +103,6 @@ function handleClick(evt){
   turn *= -1
   getWinner()
   render()
-  // console.log(board[sqIdx])
 }
 
 function getWinner(){
